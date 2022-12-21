@@ -9,8 +9,9 @@ const chat=document.getElementById('chat');
 const token=localStorage.getItem('token');
 
 window.addEventListener('load', ()=>{
-    showMessages()
-    console.log('loading')
+    setInterval(()=>{
+        showMessages()
+    },1000)
 });
 
 
@@ -33,7 +34,6 @@ const showMessages=function (){
         });
     }).catch(err=>showError(err));
 };
-
 
 msgsend.addEventListener('click', (e)=>{
     e.preventDefault();
