@@ -23,7 +23,7 @@ signup.addEventListener('click',(e)=>{
         )
         .then(res=>{
             alert(res.data.message);
-            // window.location.href="./login.html"
+            window.location.href="/login.html"
         })
         .catch((err)=>showError(err));
 });

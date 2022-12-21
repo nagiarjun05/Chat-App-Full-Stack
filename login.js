@@ -17,7 +17,7 @@ login.addEventListener('click',(e)=>{
 
     axios({
         method:'post',
-        url:`http://13.234.127.142:4000/users/login`,
+        url:`http://localhost:3000/users/login`,
         data:{
             email: email,
             password: password
@@ -30,8 +30,8 @@ login.addEventListener('click',(e)=>{
         // window.location.href="./expense.html"
     })
     .catch((err)=>{
-        showError(err)
-        // alert(err.DATA)
+        showError(err.data)
+        // console.log(err.data)
     })
 });
 
