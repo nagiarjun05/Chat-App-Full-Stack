@@ -5,19 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat</title>
-    <!-- <button id="showMsgsBtn">Show Chat</button> -->
-    <!-- <br> -->
-    <h1>Chats</h1>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body> 
+<body>
+    <header>
+        <button id="logout">Log Out</button>
+    </header>
+    <button>Create Group</button>
+    <h1>User Available</h1>
     <div>
         <ul id="user-list">
 
         </ul>
     </div>   
+    <h1>Chat</h1>
     <ul id="chat">
     </ul>
-    <form >
+    <form class="message-sending-input">
         <label for="textmsg">Enter Your Message : </label>
         <input type="text" id="textmsg" placeholder="Enter your messsage">
         <button id="sendBtn">Send</button>
