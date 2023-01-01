@@ -8,6 +8,16 @@ const chat=document.getElementById('chat');
 
 const userList=document.getElementById('user-list');
 
+const groupList=document.getElementById('show-groups');
+
+const createGroup=document.getElementById('create-group');
+
+const nav=document.getElementById('nav');
+
+const navList=document.getElementById('nav-list');
+
+const removeNav=document.querySelector('.cancel');
+
 const token=localStorage.getItem('token');
 
 window.addEventListener('load', ()=>{
@@ -25,14 +35,11 @@ const showMessages=function (){
         headers:{'Authorization':token}
     })
     .then(res=>{
-        chat.innerHTML='';
         res.data.Messages.forEach(element => {
             var li = document.createElement('li');
             li.className='msgs';
             li.innerHTML=`User ${element.userId} -    Message is "${element.message}"`;
-            
             li.value=`${element.id}`;
-                
             chat.appendChild(li);
         });
         userList.innerHTML='';
@@ -76,6 +83,46 @@ msgsend.addEventListener('click', (e)=>{
     // }
 });
 
-// logout.addEventListener('click',(e)=>{
-//     showMessages()
-// })
+logout.addEventListener('click',(e)=>{
+    localStorage.removeItem('token');
+    window.location.href='/login.html'
+})
+
+groupList.addEventListener('click',(e)=>{
+    e.preventDefault()
+    navList.innerHTML='';
+    axios({
+        method:'get',
+        url:`http://localhost:3000/users/groups`,
+        headers:{'Authorization':token}
+    })
+    .then((res)=>{
+        nav.classList.toggle('active');
+        res.data.groups.forEach((group)=>{
+            const li=document.createElement('li');
+            li.classList='group-item'
+            li.innerHTML=`
+            <a href="#">${group.name}</a>
+            `
+            navList.appendChild(li);          
+        })
+    })
+    .catch((err)=>{
+        console.log(err.message)
+    })
+});
+
+createGroup.addEventListener('click',()=>{
+    window.location.href='/creategroup.html';
+})
+
+
+removeNav.addEventListener('click', (e)=>{
+    e.preventDefault();
+    nav.classList.remove('active');
+})
+
+function showError(err){
+    document.body.innerHTML += `<div style="color:red;"> ${err}</div>`
+};
+
